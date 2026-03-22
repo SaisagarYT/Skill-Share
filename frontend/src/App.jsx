@@ -10,7 +10,7 @@ function App() {
   const [backendMsg, setBackendMsg] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:5000/')
+    fetch('https://skillshare-backend-1082972432367.asia-south1.run.app/')
       .then((res) => res.json())
       .then((data) => setBackendMsg(data.message))
       .catch(() => setBackendMsg('Could not connect to backend'));

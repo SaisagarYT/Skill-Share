@@ -1,0 +1,77 @@
+name: CI/CD Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: ${{ secrets.GCP_REGION }}
+
+jobs:
+
+  backend:
+    runs-on: ubuntu-latest
+
+    env:
+      SERVICE: ${{ secrets.SERVICE_NAME_BACKEND }}
+      IMAGE: skillshare-backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - run: gcloud auth configure-docker
+
+      - name: Build backend
+        run: |
+          docker build -t gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA ./backend
+
+      - name: Push backend
+        run: |
+          docker push gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+
+      - name: Deploy backend
+        run: |
+          gcloud run deploy $SERVICE \
+            --image gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated
+
+
+  frontend:
+    runs-on: ubuntu-latest
+
+    env:
+      SERVICE: ${{ secrets.SERVICE_NAME_FRONTEND }}
+      IMAGE: skillshare-frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - run: gcloud auth configure-docker
+
+      - name: Build frontend
+        run: |
+          docker build -t gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA ./frontend
+
+      - name: Push frontend
+        run: |
+          docker push gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+
+      - name: Deploy frontend
+        run: |
+          gcloud run deploy $SERVICE \
+            --image gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated
