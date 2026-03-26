@@ -35,11 +35,9 @@ export default function Navbar() {
           {/* Nav tabs */}
           <nav className="hidden md:flex gap-2 text-base font-medium text-dark/80">
             <div className="flex gap-2 bg-white/95 border border-white rounded-full px-2 py-1 shadow-sm relative">
-
               <a
                 href="#"
-                className="bg-dark/10 text-dark px-6 py-2 rounded-full font-semibold transition border-2 border-white shadow-sm"
-                style={{ boxShadow: '0 0 0 3px #f3f3f3' }}
+                className="bg-dark/10 text-dark px-6 py-2 rounded-full font-semibold transition"
               >
                 Home
               </a>
@@ -84,28 +82,28 @@ export default function Navbar() {
 
               <a
                 href="#"
-                className="px-6 py-2 rounded-full transition border-2 border-transparent hover:bg-dark/10 hover:text-dark hover:border-[#e5e5e5] hover:shadow-md focus:outline-none"
+                className="hover:bg-dark/5 hover:text-dark px-6 py-2 rounded-full transition"
               >
                 Blog <span className="ml-1">▼</span>
               </a>
 
               <a
                 href="#"
-                className="px-6 py-2 rounded-full transition border-2 border-transparent hover:bg-dark/10 hover:text-dark hover:border-[#e5e5e5] hover:shadow-md focus:outline-none"
+                className="hover:bg-dark/5 hover:text-dark px-6 py-2 rounded-full transition"
               >
                 Portfolio <span className="ml-1">▼</span>
               </a>
 
               <a
                 href="#"
-                className="px-6 py-2 rounded-full transition border-2 border-transparent hover:bg-dark/10 hover:text-dark hover:border-[#e5e5e5] hover:shadow-md focus:outline-none"
+                className="hover:bg-dark/5 hover:text-dark px-6 py-2 rounded-full transition"
               >
                 Solutions
               </a>
 
               <a
                 href="#"
-                className="px-6 py-2 rounded-full transition border-2 border-transparent hover:bg-dark/10 hover:text-dark hover:border-[#e5e5e5] hover:shadow-md focus:outline-none"
+                className="hover:bg-dark/5 hover:text-dark px-6 py-2 rounded-full transition"
               >
                 Pricing
               </a>
